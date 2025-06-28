@@ -1,19 +1,20 @@
+import { useState } from "react"
 import "./App.css"
 import Die from "./components/Die.jsx"
 export default function App(){
+
+  const [numbers, setNumbers] = useState(generateAllNewDice());
+  const dieArray = numbers.map(val=><Die value={val}/>)
+  function generateAllNewDice(){
+    return new Array(10)
+    .fill(0)
+    .map(()=>Math.ceil(Math.random()*6))
+  }
+
   return(
     <main>
       <div className="die-container">
-      <Die value={1} />
-      <Die value={2} />
-      <Die value={3} />
-      <Die value={2} />
-      <Die value={4} />
-      <Die value={3} />
-      <Die value={2} />
-      <Die value={1} />
-      <Die value={6} />
-      <Die value={5} />
+      {dieArray}
       </div>
     </main>
   )

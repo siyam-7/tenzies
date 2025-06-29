@@ -7,19 +7,28 @@ export default function App() {
   function generateAllNewDice() {
     return new Array(10).fill(null).map(() => ({
       value: Math.ceil(Math.random() * 6),
-      isHeld: true,
+      isHeld: false,
       id: nanoid(),
     }));
   }
   function handleRoll() {
-    setDice(generateAllNewDice());
+    setDice((prevDice) =>
+      prevDice.map((die) =>
+        die.isHeld
+          ? die
+          : {
+              ...die,
+              value: Math.ceil(Math.random() * 6)
+            }
+      )
+    );
   }
   function hold(id) {
-    setDice(prevDice=>
-      prevDice.map(die=>
-        die.id === id ? {...die, isHeld : !die.isHeld}: die
+    setDice((prevDice) =>
+      prevDice.map((die) =>
+        die.id === id ? { ...die, isHeld: !die.isHeld } : die
       )
-    )
+    );
   }
   const dieArray = dice.map((dieObj) => (
     <Die

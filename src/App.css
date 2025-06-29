@@ -27,6 +27,17 @@ main {
     justify-content: space-evenly;
     
 }
+.title {
+    font-size: 40px;
+    margin: 0;
+}
+.instructions{
+    margin:0;
+    padding-inline: 60px;
+    font-size: 15px;
+    color: #4A4E74;
+    font-family: "Inter", sans-serif;
+}
 
 .die-container{
     display: grid;

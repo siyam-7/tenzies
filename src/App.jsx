@@ -18,7 +18,7 @@ export default function App() {
           ? die
           : {
               ...die,
-              value: Math.ceil(Math.random() * 6)
+              value: Math.ceil(Math.random() * 6),
             }
       )
     );
@@ -42,6 +42,11 @@ export default function App() {
 
   return (
     <main>
+      <h1 className="title">Tenzies</h1>
+      <p className="instructions">
+        Roll until all dice are the same. Click each die to freeze it at its
+        current value between rolls.
+      </p>
       <div className="die-container">{dieArray}</div>
       <button onClick={handleRoll}>Roll</button>
     </main>

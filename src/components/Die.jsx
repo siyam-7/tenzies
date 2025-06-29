@@ -1,5 +1,14 @@
 export default function Die(prop){
+    
     return(
-        <button>{prop.value}</button>
+        <>
+         <button
+            style={prop.isHeld ? { backgroundColor: "#59E391" } : {}}
+            onClick={()=> prop.hold(prop.id)}
+         >
+            {prop.value}
+         </button>
+        </>
+        
     )
 }

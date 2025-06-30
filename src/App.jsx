@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { nanoid } from "nanoid";
 import "./App.css";
 import Die from "./components/Die.jsx";
@@ -8,7 +8,11 @@ export default function App() {
   const gameWon =
     dice.every((die) => die.isHeld) &&
     dice.every((die) => die.value === dice[0].value);
-
+  
+  const btnRef = useRef(null);
+  useEffect(()=>{
+      if(gameWon) btnRef.current.focus();
+  },[gameWon])
   function generateAllNewDice() {
     return new Array(10).fill(null).map(() => ({
       value: Math.ceil(Math.random() * 6),
@@ -62,7 +66,7 @@ export default function App() {
         current value between rolls.
       </p>
       <div className="die-container">{dieArray}</div>
-      <button onClick={handleRoll}>{gameWon ? "New Game" : "Roll"}</button>
+      <button onClick={handleRoll} ref={btnRef}>{gameWon ? "New Game" : "Roll"}</button>
     </main>
   );
 }

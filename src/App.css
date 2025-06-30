@@ -65,6 +65,7 @@ button{
 }
 
 main > button{
+    font-size: 1rem;
     height: 50px;
     width: 120px;
     color: white;

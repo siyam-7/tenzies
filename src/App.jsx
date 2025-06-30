@@ -18,7 +18,8 @@ export default function App() {
   }
 
   function handleRoll() {
-    setDice((prevDice) =>
+    gameWon?setDice(generateAllNewDice())
+    :setDice((prevDice) =>
       prevDice.map((die) =>
         die.isHeld
           ? die
@@ -56,7 +57,7 @@ export default function App() {
       </p>
       <div className="die-container">{dieArray}</div>
       <button onClick={handleRoll}>
-        {gameWon ? <>New Game</> : <>Roll</>}
+        {gameWon ? "New Game":"Roll"}
       </button>
     </main>
   );

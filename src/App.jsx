@@ -18,17 +18,18 @@ export default function App() {
   }
 
   function handleRoll() {
-    gameWon?setDice(generateAllNewDice())
-    :setDice((prevDice) =>
-      prevDice.map((die) =>
-        die.isHeld
-          ? die
-          : {
-              ...die,
-              value: Math.ceil(Math.random() * 6),
-            }
-      )
-    );
+    gameWon
+      ? setDice(generateAllNewDice())
+      : setDice((prevDice) =>
+          prevDice.map((die) =>
+            die.isHeld
+              ? die
+              : {
+                  ...die,
+                  value: Math.ceil(Math.random() * 6),
+                }
+          )
+        );
   }
   function hold(id) {
     setDice((prevDice) =>
@@ -49,16 +50,19 @@ export default function App() {
 
   return (
     <main>
-      {gameWon&&<Confetti/>}
+      {gameWon && <Confetti />}
+      <div aria-live="polite" className="sr-only">
+        {gameWon && (
+          <p>Congratulations! You won! Press "New Game" to start again.</p>
+        )}
+      </div>
       <h1 className="title">Tenzies</h1>
       <p className="instructions">
         Roll until all dice are the same. Click each die to freeze it at its
         current value between rolls.
       </p>
       <div className="die-container">{dieArray}</div>
-      <button onClick={handleRoll}>
-        {gameWon ? "New Game":"Roll"}
-      </button>
+      <button onClick={handleRoll}>{gameWon ? "New Game" : "Roll"}</button>
     </main>
   );
 }

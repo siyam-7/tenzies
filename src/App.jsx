@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import "./App.css";
 import Die from "./components/Die.jsx";
 export default function App() {
   const [dice, setDice] = useState(generateAllNewDice());
+  useEffect(() => {
+    if (
+      dice.every((die) => die.isHeld) &&
+      dice.every((die) => die.value === dice[0].value)
+    )
+      console.log("Game won!!");
+  }, [dice]);
+
   function generateAllNewDice() {
     return new Array(10).fill(null).map(() => ({
       value: Math.ceil(Math.random() * 6),
@@ -11,6 +19,7 @@ export default function App() {
       id: nanoid(),
     }));
   }
+
   function handleRoll() {
     setDice((prevDice) =>
       prevDice.map((die) =>
